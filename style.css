@@ -1,0 +1,22 @@
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    height: 60px;
+    width: 160px;
+}
+
+h1 {
+    font-size: large;
+}
+
+h2 {
+    font-size: medium;
+}
+h3 {
+    font-size: small;
+}
