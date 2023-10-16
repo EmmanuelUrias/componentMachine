@@ -4,9 +4,10 @@
 // component class
 
 class Component {
-    constructor(element, name) {
+    constructor(parent, element, elemName) {
+        this.parent = parent
         this.element = element
-        this.name = name
+        this.elemName = elemName
         this.componentArr = []
 
     }
@@ -17,31 +18,35 @@ class Component {
         for (let i = 0; i < this.componentArr.length; i++ ){
             elemNum++
         }
-        this.element.setAttribute('id', `${name}-${elemNum}`)
+        this.element.setAttribute('id', `${this.elemName}-${elemNum}`)
     }
     duplicate() {
         // Get this.element and make another one under the same parent element
-        let newDiv = document.createElement('div')
         let newElement = this.element
-        newDiv.appendChild(newElement)
+        
+        this.parent.appendChild(newElement)
 
-        this.componentArr.push(newDiv)
+        this.componentArr.push(newElement)
 
         let elemNum = 1
         for (let i = 0; i < this.componentArr.length; i++ ){
             elemNum++
         }
-        newDiv.setAttribute('id', `${name}-${elemNum}`)
+        //newElement.setAttribute('id', `${name}-${elemNum}`)
 
-        console.log(newDiv)
+        console.log(newElement)
+        console.log(this.element)
 
-        return newDiv
+        let newText = document.createElement('p')
+        newText.innerHTML = 'This is the new component'
+        newElement.appendChild(newText)
     }
 }
 
 let card = document.getElementById('card')
+let cardParent = document.getElementById('card-container')
 
-const cardComponent = new Component (card, 'card')
+const cardComponent = new Component (cardParent, card, 'card')
 
 let card2 = card
 
