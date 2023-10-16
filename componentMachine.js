@@ -1,7 +1,6 @@
-//Write a class that encapsultates the html elements and give that class methods to duplicate, change, and other things
+//Write a class that encapsulates the html elements and give that class methods to duplicate, change, and other things
 
 // Remember we are not using this logic and code and putting it into our html but rather pulling the html into here and manipulating it through here.
-// component class
 
 class Component {
     constructor(parent, element, elemName) {
@@ -11,35 +10,28 @@ class Component {
         this.componentArr = []
 
     }
+
     initiate() {
         this.componentArr.push(this.element)
 
-        let elemNum = 1
-        for (let i = 0; i < this.componentArr.length; i++ ){
-            elemNum++
-        }
-        this.element.setAttribute('id', `${this.elemName}-${elemNum}`)
+        this.element.setAttribute('id', `${this.elemName}-${this.componentArr.length}`)
     }
+
     duplicate() {
         // Get this.element and make another one under the same parent element
-        let newElement = this.element
+        let newElement = this.element.cloneNode(true)
         
-        this.parent.appendChild(newElement)
+        newElement.setAttribute('id', `${this.elemName}-${this.componentArr.length + 1}`)
 
         this.componentArr.push(newElement)
 
-        let elemNum = 1
-        for (let i = 0; i < this.componentArr.length; i++ ){
-            elemNum++
-        }
-        //newElement.setAttribute('id', `${name}-${elemNum}`)
+        this.parent.appendChild(newElement)
 
-        console.log(newElement)
-        console.log(this.element)
+    }
 
-        let newText = document.createElement('p')
-        newText.innerHTML = 'This is the new component'
-        newElement.appendChild(newText)
+    change(arrPosition, componentToChangeTo) {
+        this.componentArr[arrPosition] = componentToChangeTo
+
     }
 }
 
@@ -48,25 +40,19 @@ let cardParent = document.getElementById('card-container')
 
 const cardComponent = new Component (cardParent, card, 'card')
 
-let card2 = card
-
-console.log(card)
-console.log(card2)
-
-console.log(cardComponent)
-
 cardComponent.initiate()
-console.log(cardComponent.componentArr)
 
-cardComponent.duplicate()
-//console.log(cardComponent.newDiv)
+let btn = document.getElementById('btn')
+let btnParent = document.getElementById('button-container')
 
+const btnComponent = new Component(btnParent, btn, 'btn')
 
+btnComponent.initiate()
 
-// let cardArray = [0, 1, 2, 3, 4, 5]
+cardComponent.change(3, btn)
 
-// for(i = 0; i < cardArray.length; i++){
-//     let newCard = cardComponent.element
-//     document.createElement('div').setAttribute('id', `card-${i}`)
-//     document.getElementById(`card-${i}`).innerHTML = newCard
-// }
+for (let i = 0; i < 6; i++) {
+    cardComponent.duplicate()
+    btnComponent.duplicate()
+}
+

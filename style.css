@@ -1,3 +1,9 @@
+.Hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .card-container {
     display: flex;
     flex-direction: column;
@@ -6,8 +12,8 @@
 }
 
 .card {
-    height: 60px;
-    width: 160px;
+    height: 160px;
+    width: 200px;
 }
 
 h1 {
